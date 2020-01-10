@@ -439,7 +439,9 @@ if (WIN32)
     add_definitions(-DPLATFORM_WINDOWS -DNOGDI -DNOMINMAX -D_USE_MATH_DEFINES)
     # parallel build
     # These compiler opitions cannot be forwarded to NVCC, so cannot use add_compiler_options
-    string(APPEND CMAKE_CXX_FLAGS " /MP")    
+    string(APPEND CMAKE_CXX_FLAGS " /MP")
+    #in order to fix this warning, we need C++17 so that we can use 'if constexpr'
+    string(APPEND CMAKE_CXX_FLAGS " /wd4127")
     if (onnxruntime_ENABLE_STATIC_ANALYSIS)
         string(APPEND CMAKE_CXX_FLAGS
             " /analyze:WX- "
